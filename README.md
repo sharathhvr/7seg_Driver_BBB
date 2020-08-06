@@ -8,7 +8,7 @@ Step3: Use the source code in src folder for digital clock application
 Step4: compile code  
 **Note: Once compiled run the code in sudo mode, and my first run always gave file error and the second run always gave output.Dont know why :)   
 
-Output for Digital clock application
+Output for Digital clock application  
 <img src="Images/IMG_9588.jpg" width="600" >
 
 
