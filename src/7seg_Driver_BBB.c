@@ -13,24 +13,19 @@
 #include <stdint.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <time.h>
 #include "GPIO_drivers.h"
 #include "SevenSeg_Driver.h"
 
 
 
-int main(int argc, char *argv[])
+int main(void)
 {
-	printf("4 digit 7seg LED up/down/random counter application\n");
 
-	    if ( argc != 2 ) /* argc should be 3 for correct execution */
-	    {
+	int hours,minutes;
+	int value=0;
+	printf("digital clock application\n");
 
-	        printf( "No input Number");
-
-	    }
-	    else
-	    {
-	        int value = atoi(argv[1]);
 
 	        /*first lets export all required gpios */
 	        gpio_export(GPIO_66_P8_7_SEGA);
@@ -80,12 +75,30 @@ int main(int argc, char *argv[])
 	        gpio_write_value(GPIO_117_P9_30_DIGIT3,GPIO_HIGH_VALUE);
 	        gpio_write_value(GPIO_115_P9_27_DIGIT4,GPIO_HIGH_VALUE);
 
+	        time_t rawtime;
+		    struct tm * timeinfo;
+
+
+	        char buf[6];
 	        while(1)
 	        {
+	        	time ( &rawtime );
+			    timeinfo = localtime ( &rawtime );
+			   // correct the time according to your timezone
+			    hours=timeinfo->tm_hour;
+			    minutes=timeinfo->tm_min;
+			    hours=(hours+5)%23;
+			    minutes=(minutes+52);
+			    if(minutes > 59)
+			    {
+			    	hours=(hours+1)%23;
+			    	minutes=(minutes%59);
+			    }
+			    sprintf(buf,"%02d%02d",hours,minutes);
+			    value=atoi(buf);
 	        	dispaly_numbers(value);
 	        }
 
-	    }
 
 	return EXIT_SUCCESS;
 }
