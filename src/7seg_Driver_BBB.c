@@ -22,7 +22,7 @@
 int main(void)
 {
 
-	int hours,minutes;
+	unsigned int hours,minutes,new_hours,new_minutes=0;
 	int value=0;
 	printf("digital clock application\n");
 
@@ -78,7 +78,7 @@ int main(void)
 	        time_t rawtime;
 		    struct tm * timeinfo;
 
-
+		    unsigned int calc_minutes=0;
 	        char buf[6];
 	        while(1)
 	        {
@@ -87,14 +87,18 @@ int main(void)
 			   // correct the time according to your timezone
 			    hours=timeinfo->tm_hour;
 			    minutes=timeinfo->tm_min;
-			    hours=(hours+5)%23;
-			    minutes=(minutes+52);
-			    if(minutes > 59)
+			    calc_minutes=(hours*60)+minutes;
+			    calc_minutes=calc_minutes-320;
+			    if(calc_minutes < 0)
 			    {
-			    	hours=(hours+1)%23;
-			    	minutes=(minutes%59);
+			    	calc_minutes=calc_minutes+1440;
 			    }
-			    sprintf(buf,"%02d%02d",hours,minutes);
+			    if(calc_minutes !=0)
+			    {
+			    new_hours=calc_minutes/60;
+			    new_minutes=calc_minutes%60;
+			    }
+			    sprintf(buf,"%02d%02d",new_hours,new_minutes);
 			    value=atoi(buf);
 	        	dispaly_numbers(value);
 	        }
