@@ -9,6 +9,7 @@
 #define SEVENSEG_DRIVER_H_
 
 #include<stdint.h>
+#include "GPIO_drivers.h"
 
 /*==========================================================================================
 BBB_expansion_header_P8_pins           GPIO number            4-digit 7seg Display pin number
@@ -36,19 +37,6 @@ P9.27                                   GPIO_115                     6	 (DIGIT 4
 /* un comment this macro only if you use COMMAN CATHODE display */
 #define COMMON_CATHODE
 
-#define GPIO_66     66
-#define GPIO_67     67
-#define GPIO_69     69
-#define GPIO_68     68
-#define GPIO_45     45
-#define GPIO_44     44
-#define GPIO_26     26
-#define GPIO_46     46
-
-#define GPIO_48     48
-#define GPIO_49     49
-#define GPIO_112    112
-#define GPIO_115    115
 
 
 #define GPIO_66_P8_7_SEGA       GPIO_66       /*  display pin 11    */
@@ -66,15 +54,6 @@ P9.27                                   GPIO_115                     6	 (DIGIT 4
 #define GPIO_115_P9_27_DIGIT4    GPIO_115      /*  display pin 6     */
 
 
-
-#define HIGH_VALUE          1
-#define LOW_VALUE           0
-
-#define GPIO_DIR_OUT        HIGH_VALUE
-#define GPIO_DIR_IN         LOW_VALUE
-
-#define GPIO_LOW_VALUE      LOW_VALUE
-#define GPIO_HIGH_VALUE     HIGH_VALUE
 
 #ifdef COMMON_CATHODE
 	#define SEGMENT_ON          HIGH_VALUE
